@@ -1,148 +1,145 @@
-# Çiftçiler Yağ Web Sitesi
+# Çiftçiler Yağ - Multi-Language Website
 
-Modern, responsive ve kullanıcı dostu bir web sitesi. Çiftçiler Yağ firması için özel olarak tasarlanmıştır.
+Modern, responsive ve çok dilli web sitesi. Türkçe, İngilizce ve İbranice dil desteği ile geliştirilmiştir.
 
-## 🚀 Özellikler
+## 🌟 Özellikler
 
+- **Çok Dilli Destek**: Türkçe (TR), İngilizce (EN), İbranice (HE)
 - **Responsive Tasarım**: Tüm cihazlarda mükemmel görünüm
-- **Modern UI/UX**: Soft ve şık tasarım
-- **Smooth Animations**: Akıcı geçişler ve animasyonlar
-- **Interactive Elements**: Etkileşimli bileşenler
-- **Contact Form**: İletişim formu ile bildirim sistemi
-- **SEO Friendly**: Arama motoru dostu yapı
+- **Modern UI/UX**: Soft tasarım, smooth animasyonlar
+- **SEO Optimizasyonu**: Tam SEO desteği
+- **Hızlı Yükleme**: Optimize edilmiş performans
 
-## 🛠️ Teknolojiler
+## 🚀 Teknolojiler
 
-- HTML5
-- CSS3 (Custom Properties, Flexbox, Grid)
-- JavaScript (ES6+)
-- Bootstrap 5
-- Font Awesome Icons
+- **HTML5**: Semantic markup
+- **CSS3**: Modern styling, Flexbox, Grid
+- **JavaScript (ES6+)**: Interactive functionality
+- **Bootstrap 5.3.0**: Responsive framework
+- **Font Awesome 6.4.0**: Icon library
 
-## 📁 Dosya Yapısı
+## 📁 Proje Yapısı
 
 ```
 ciftcileryag/
-├── index.html          # Ana sayfa
-├── styles.css          # CSS stilleri
-├── script.js           # JavaScript fonksiyonları
-├── README.md           # Proje dokümantasyonu
-└── images/             # Görseller (opsiyonel)
+├── index.html              # Ana sayfa (Türkçe)
+├── index-en.html           # Ana sayfa (İngilizce)
+├── index-he.html           # Ana sayfa (İbranice)
+├── basinda-biz.html        # Basında Biz (TR)
+├── basinda-biz-en.html     # In The Press (EN)
+├── basinda-biz-he.html     # בעיתונות (HE)
+├── fabrika-uretim.html     # Fabrika ve Üretim (TR)
+├── fabrika-uretim-en.html  # Factory & Production (EN)
+├── fabrika-uretim-he.html  # מפעל וייצור (HE)
+├── politikalar.html        # Politikalar (TR)
+├── politikalar-en.html     # Policies (EN)
+├── politikalar-he.html     # מדיניות (HE)
+├── sertifikalar.html       # Sertifikalar (TR)
+├── sertifikalar-en.html    # Certificates (EN)
+├── sertifikalar-he.html    # תעודות (HE)
+├── styles.css              # Ana CSS dosyası
+├── script.js               # JavaScript fonksiyonları
+├── sitemap.xml             # SEO sitemap
+├── robots.txt              # SEO robots
+├── images/                 # Görseller
+│   ├── aycicek.jpg
+│   ├── findik.jpg
+│   ├── misir.jpg
+│   ├── kanola.jpg
+│   └── ...
+├── sertifikalar/           # Sertifika görselleri
+│   ├── belge1.webp
+│   ├── belge2.webp
+│   └── ...
+└── README.md               # Bu dosya
 ```
+
+## 🌐 Sayfalar
+
+### Ana Sayfa
+- Hero section
+- Ürünlerimiz (Ayçiçek, Fındık, Mısır, Kanola yağı)
+- Hakkımızda
+- İletişim formu
+
+### Kurumsal Sayfalar
+- **Basında Biz**: Haberler ve medya
+- **Fabrika ve Üretim**: Üretim süreci, video
+- **Politikalar**: Şirket politikaları
+- **Sertifikalar**: ISO ve kalite belgeleri
 
 ## 🎨 Tasarım Özellikleri
 
-### Renk Paleti
-- **Primary**: #ff6b35 (Turuncu)
-- **Secondary**: #2c3e50 (Koyu Mavi)
-- **Accent**: #f39c12 (Altın Sarısı)
-- **Background**: #1a1a1a (Koyu Gri)
-
-### Tipografi
-- **Font Family**: Segoe UI, Tahoma, Geneva, Verdana, sans-serif
-- **Responsive**: Mobil uyumlu font boyutları
+- **Renk Paleti**: 
+  - Primary: #ffc107 (Altın)
+  - Dark: #1a1a1a
+  - Light: #ffffff
+- **Font**: Segoe UI, Tahoma, Geneva, Verdana
+- **Animasyonlar**: Smooth transitions, hover effects
+- **RTL Desteği**: İbranice için Right-to-Left
 
 ## 📱 Responsive Breakpoints
 
-- **Desktop**: 1200px+
-- **Tablet**: 768px - 1199px
-- **Mobile**: 320px - 767px
+- **Desktop**: 992px+
+- **Tablet**: 768px - 991px
+- **Mobile**: 767px ve altı
 
-## 🚀 Kurulum ve Çalıştırma
+## 🔧 Kurulum
 
-1. Dosyaları bilgisayarınıza indirin
-2. `index.html` dosyasını web tarayıcınızda açın
-3. Veya yerel bir web sunucusu kullanın
-
-### Yerel Sunucu ile Çalıştırma
-
+1. Projeyi klonlayın:
 ```bash
-# Python 3 ile
-python -m http.server 8000
-
-# Node.js ile (http-server gerekli)
-npx http-server
-
-# PHP ile
-php -S localhost:8000
+git clone https://github.com/kullaniciadi/ciftcileryag-website.git
 ```
 
-## 📋 Sayfa Bölümleri
-
-1. **Hero Section**: Ana tanıtım alanı
-2. **Features**: Ürün özellikleri
-3. **Products**: Ürün kategorileri
-4. **About**: Hakkımızda bilgileri
-5. **Contact**: İletişim formu ve bilgileri
-
-## 🎯 Özellikler Detayı
-
-### Navigation
-- Fixed navbar
-- Dropdown menüler
-- Smooth scrolling
-- Active link highlighting
-
-### Hero Section
-- Animated background
-- Oil splash animations
-- Call-to-action butonları
-- Navigation arrows
-
-### Features Section
-- Hover effects
-- Icon animations
-- Card-based layout
-
-### Products Section
-- Product cards
-- Hover animations
-- Gradient backgrounds
-
-### Contact Form
-- Form validation
-- Success/error notifications
-- Responsive design
-
-## 🔧 Özelleştirme
-
-### Renkleri Değiştirme
-`styles.css` dosyasındaki CSS değişkenlerini düzenleyin:
-
-```css
-:root {
-    --primary-color: #ff6b35;
-    --secondary-color: #2c3e50;
-    --accent-color: #f39c12;
-    /* ... */
-}
+2. Proje klasörüne gidin:
+```bash
+cd ciftcileryag-website
 ```
 
-### İçerik Güncelleme
-`index.html` dosyasındaki metinleri ve görselleri değiştirin.
+3. `index.html` dosyasını tarayıcıda açın
+
+## 🌍 Dil Değiştirme
+
+Her sayfada sağ üst köşedeki dil seçici ile:
+- 🇹🇷 Türkçe
+- 🇬🇧 English  
+- 🇮🇱 עברית
+
+## 📈 SEO Özellikleri
+
+- Meta tags (title, description, keywords)
+- Open Graph tags
+- Twitter Card tags
+- Structured Data (JSON-LD)
+- Hreflang tags
+- Sitemap.xml
+- Robots.txt
+- Canonical URLs
+
+## 🎯 Performans
+
+- Optimize edilmiş görseller
+- Minified CSS/JS
+- Lazy loading
+- Fast loading times
 
 ## 📞 İletişim
 
-- **Telefon**: +90 272 221 10 50
-- **Website**: https://www.ciftcileryag.com.tr
+**Çiftçiler Yağ Sanayi**
+- 📍 Afyonkarahisar Organize Sanayi Bölgesi
+- 📞 +90 272 221 10 50
+- 📧 info@ciftcileryag.com
+
+## 👨‍💻 Geliştirici
+
+**Inovi Tech Ltd**
+- 🌐 [inovitech.com](https://inovitech.com)
+- 💻 Web tasarım ve geliştirme
 
 ## 📄 Lisans
 
-Bu proje Çiftçiler Yağ firması için özel olarak geliştirilmiştir.
+Bu proje Çiftçiler Yağ Sanayi için özel olarak geliştirilmiştir.
 
-## 🤝 Katkıda Bulunma
+---
 
-1. Projeyi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
-5. Pull Request oluşturun
-
-## 📝 Changelog
-
-### v1.0.0 (2024-01-XX)
-- İlk sürüm
-- Responsive tasarım
-- Modern UI/UX
-- Interactive elements
-- Contact form functionality
+**© 2025 Çiftçiler Yağ Sanayi. Tüm hakları saklıdır.**
