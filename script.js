@@ -46,28 +46,60 @@ function initMobileTouchOptimizations() {
 
 // Mobil dropdown dokunmatik optimizasyonları
 function initMobileDropdownTouch() {
-    // Tüm dropdown toggle'ları bul ve Bootstrap'i devre dışı bırak
+    // Tüm dropdown toggle'ları bul
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     
     dropdownToggles.forEach(toggle => {
-        // Bootstrap özelliklerini tamamen kaldır
+        // Bootstrap özelliklerini kaldır
         toggle.removeAttribute('data-bs-toggle');
         toggle.removeAttribute('data-bs-target');
         toggle.removeAttribute('role');
         toggle.removeAttribute('aria-expanded');
         toggle.removeAttribute('aria-haspopup');
         
-        // Bootstrap'in event listener'larını temizle
-        const newToggle = toggle.cloneNode(true);
-        toggle.parentNode.replaceChild(newToggle, toggle);
-        
-        // Kendi event listener'ımızı ekle
-        newToggle.addEventListener('click', function(e) {
+        // Dokunmatik cihazlar için özel event listener
+        toggle.addEventListener('touchstart', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            e.stopImmediatePropagation();
             
-            console.log('Dropdown clicked!'); // Debug için
+            console.log('Touch detected on dropdown!'); // Debug için
+            
+            // Dokunmatik geri bildirim
+            this.style.transform = 'scale(0.98)';
+            this.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, 150);
+            
+            // Diğer açık dropdown'ları kapat
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            allDropdowns.forEach(dropdown => {
+                if (dropdown !== this.closest('.dropdown')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            
+            // Bu dropdown'ı aç/kapat
+            const dropdown = this.closest('.dropdown');
+            const isOpen = dropdown.classList.contains('show');
+            
+            if (isOpen) {
+                dropdown.classList.remove('show');
+                console.log('Dropdown closed'); // Debug için
+            } else {
+                dropdown.classList.add('show');
+                console.log('Dropdown opened'); // Debug için
+            }
+        }, { passive: false });
+        
+        // Click event'i de ekle (PC için)
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Click detected on dropdown!'); // Debug için
             
             // Dokunmatik geri bildirim
             this.style.transform = 'scale(0.98)';
@@ -100,21 +132,62 @@ function initMobileDropdownTouch() {
         });
         
         // Dropdown menü öğelerini işle
-        const dropdownMenu = newToggle.nextElementSibling;
+        const dropdownMenu = toggle.nextElementSibling;
         if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
             const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
             
             dropdownItems.forEach(item => {
-                // Mevcut event listener'ları temizle
-                const newItem = item.cloneNode(true);
-                item.parentNode.replaceChild(newItem, item);
-                
-                newItem.addEventListener('click', function(e) {
+                // Dokunmatik cihazlar için touch event
+                item.addEventListener('touchstart', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                     
-                    console.log('Dropdown item clicked:', this.textContent); // Debug için
+                    console.log('Touch detected on dropdown item:', this.textContent); // Debug için
+                    
+                    // Dokunmatik geri bildirim
+                    this.style.transform = 'scale(0.98)';
+                    this.style.backgroundColor = 'var(--primary-color)';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                    }, 150);
+                }, { passive: false });
+                
+                item.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Touch end on dropdown item:', this.textContent); // Debug için
+                    
+                    // Dropdown'ı kapat
+                    const dropdown = this.closest('.dropdown');
+                    dropdown.classList.remove('show');
+                    
+                    // Link'e git
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        if (href.startsWith('#')) {
+                            // Sayfa içi link
+                            const targetElement = document.querySelector(href);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        } else {
+                            // Harici link
+                            window.location.href = href;
+                        }
+                    }
+                }, { passive: false });
+                
+                // Click event'i de ekle (PC için)
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Click detected on dropdown item:', this.textContent); // Debug için
                     
                     // Dokunmatik geri bildirim
                     this.style.transform = 'scale(0.98)';
@@ -150,8 +223,8 @@ function initMobileDropdownTouch() {
         }
     });
     
-    // Dropdown dışına tıklandığında kapat
-    document.addEventListener('click', function(e) {
+    // Dropdown dışına dokunulduğunda kapat
+    document.addEventListener('touchstart', function(e) {
         if (!e.target.closest('.dropdown')) {
             const allDropdowns = document.querySelectorAll('.dropdown.show');
             allDropdowns.forEach(dropdown => {
@@ -160,8 +233,8 @@ function initMobileDropdownTouch() {
         }
     });
     
-    // Touch event'leri için de aynı işlemi yap
-    document.addEventListener('touchstart', function(e) {
+    // Click event'i de ekle (PC için)
+    document.addEventListener('click', function(e) {
         if (!e.target.closest('.dropdown')) {
             const allDropdowns = document.querySelectorAll('.dropdown.show');
             allDropdowns.forEach(dropdown => {

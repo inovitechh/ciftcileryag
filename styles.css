@@ -1973,6 +1973,9 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        /* Dokunmatik cihazlar için ek optimizasyonlar */
+        touch-action: manipulation;
+        cursor: pointer;
     }
     
     .nav-link {
@@ -1983,6 +1986,9 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        /* Dokunmatik cihazlar için ek optimizasyonlar */
+        touch-action: manipulation;
+        cursor: pointer;
     }
     
     .navbar-toggler {
@@ -1993,6 +1999,9 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        /* Dokunmatik cihazlar için ek optimizasyonlar */
+        touch-action: manipulation;
+        cursor: pointer;
     }
     
     .dropdown-toggle {
@@ -2002,6 +2011,9 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        /* Dokunmatik cihazlar için ek optimizasyonlar */
+        touch-action: manipulation;
+        cursor: pointer;
     }
     
     /* Mobil dropdown menü için özel stiller */
@@ -2012,5 +2024,15 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        /* Dokunmatik cihazlar için ek optimizasyonlar */
+        touch-action: manipulation;
+    }
+    
+    /* Dokunmatik cihazlar için dropdown menü görünürlüğü */
+    .dropdown.show .dropdown-menu {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
     }
 }
