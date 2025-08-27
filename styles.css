@@ -121,7 +121,7 @@ body {
     }
 }
 
-/* Mobile dropdown - Bootstrap handles this */
+/* Mobile dropdown - Custom handling */
 @media (max-width: 991px) {
     .dropdown-menu {
         opacity: 1 !important;
@@ -129,11 +129,31 @@ body {
         margin-top: 0.5rem;
         border-radius: 10px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: none;
+        position: static !important;
+        float: none;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
     }
     
     /* Mobil dropdown menü için özel stiller */
     .dropdown-menu.show {
         display: block !important;
+    }
+    
+    /* Dropdown toggle için mobil optimizasyonları */
+    .dropdown-toggle {
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .dropdown-toggle::after {
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.show .dropdown-toggle::after {
+        transform: rotate(180deg);
     }
 }
 

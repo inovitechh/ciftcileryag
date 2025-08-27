@@ -46,37 +46,43 @@ function initMobileTouchOptimizations() {
 
 // Mobil dropdown dokunmatik optimizasyonları
 function initMobileDropdownTouch() {
+    // Tüm dropdown toggle'ları bul ve Bootstrap'i devre dışı bırak
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     
     dropdownToggles.forEach(toggle => {
-        // Bootstrap'i tamamen devre dışı bırak
+        // Bootstrap özelliklerini tamamen kaldır
         toggle.removeAttribute('data-bs-toggle');
         toggle.removeAttribute('data-bs-target');
+        toggle.removeAttribute('role');
+        toggle.removeAttribute('aria-expanded');
+        toggle.removeAttribute('aria-haspopup');
         
-        // Kendi dropdown sistemimizi oluştur
-        toggle.addEventListener('click', function(e) {
+        // Bootstrap'in event listener'larını temizle
+        const newToggle = toggle.cloneNode(true);
+        toggle.parentNode.replaceChild(newToggle, toggle);
+        
+        // Kendi event listener'ımızı ekle
+        newToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            console.log('Dropdown clicked!'); // Debug için
             
             // Dokunmatik geri bildirim
             this.style.transform = 'scale(0.98)';
             this.style.opacity = '0.8';
             
-            // Kısa süre sonra normal haline döndür
             setTimeout(() => {
                 this.style.transform = '';
                 this.style.opacity = '';
             }, 150);
             
             // Diğer açık dropdown'ları kapat
-            const otherDropdowns = document.querySelectorAll('.dropdown.show');
-            otherDropdowns.forEach(dropdown => {
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            allDropdowns.forEach(dropdown => {
                 if (dropdown !== this.closest('.dropdown')) {
                     dropdown.classList.remove('show');
-                    const otherToggle = dropdown.querySelector('.dropdown-toggle');
-                    if (otherToggle) {
-                        otherToggle.setAttribute('aria-expanded', 'false');
-                    }
                 }
             });
             
@@ -85,32 +91,36 @@ function initMobileDropdownTouch() {
             const isOpen = dropdown.classList.contains('show');
             
             if (isOpen) {
-                // Dropdown'ı kapat
                 dropdown.classList.remove('show');
-                this.setAttribute('aria-expanded', 'false');
+                console.log('Dropdown closed'); // Debug için
             } else {
-                // Dropdown'ı aç
                 dropdown.classList.add('show');
-                this.setAttribute('aria-expanded', 'true');
+                console.log('Dropdown opened'); // Debug için
             }
         });
         
-        // Mobil dropdown menü öğeleri için dokunmatik optimizasyon
-        const dropdownMenu = toggle.nextElementSibling;
-        if (dropdownMenu) {
+        // Dropdown menü öğelerini işle
+        const dropdownMenu = newToggle.nextElementSibling;
+        if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
             const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
             
             dropdownItems.forEach(item => {
-                item.addEventListener('click', function(e) {
+                // Mevcut event listener'ları temizle
+                const newItem = item.cloneNode(true);
+                item.parentNode.replaceChild(newItem, item);
+                
+                newItem.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    console.log('Dropdown item clicked:', this.textContent); // Debug için
                     
                     // Dokunmatik geri bildirim
                     this.style.transform = 'scale(0.98)';
                     this.style.backgroundColor = 'var(--primary-color)';
                     this.style.color = 'white';
                     
-                    // Kısa süre sonra normal haline döndür
                     setTimeout(() => {
                         this.style.transform = '';
                         this.style.backgroundColor = '';
@@ -120,12 +130,8 @@ function initMobileDropdownTouch() {
                     // Dropdown'ı kapat
                     const dropdown = this.closest('.dropdown');
                     dropdown.classList.remove('show');
-                    const toggle = dropdown.querySelector('.dropdown-toggle');
-                    if (toggle) {
-                        toggle.setAttribute('aria-expanded', 'false');
-                    }
                     
-                    // Link'e git (eğer href varsa)
+                    // Link'e git
                     const href = this.getAttribute('href');
                     if (href && href !== '#') {
                         if (href.startsWith('#')) {
@@ -146,16 +152,22 @@ function initMobileDropdownTouch() {
     
     // Dropdown dışına tıklandığında kapat
     document.addEventListener('click', function(e) {
-        const dropdowns = document.querySelectorAll('.dropdown.show');
-        dropdowns.forEach(dropdown => {
-            if (!dropdown.contains(e.target)) {
+        if (!e.target.closest('.dropdown')) {
+            const allDropdowns = document.querySelectorAll('.dropdown.show');
+            allDropdowns.forEach(dropdown => {
                 dropdown.classList.remove('show');
-                const toggle = dropdown.querySelector('.dropdown-toggle');
-                if (toggle) {
-                    toggle.setAttribute('aria-expanded', 'false');
-                }
-            }
-        });
+            });
+        }
+    });
+    
+    // Touch event'leri için de aynı işlemi yap
+    document.addEventListener('touchstart', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            const allDropdowns = document.querySelectorAll('.dropdown.show');
+            allDropdowns.forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        }
     });
 }
 
