@@ -1942,3 +1942,55 @@ html[lang="he"] .inovi-credit-content, html[dir="rtl"] .inovi-credit-content {
     direction: rtl;
     text-align: center;
 }
+
+/* Mobil dokunmatik optimizasyonları için ek stiller */
+@media (hover: none) and (pointer: coarse) {
+    .dropdown-item {
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.2);
+        /* Bootstrap'in varsayılan long press davranışını devre dışı bırak */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .nav-link {
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.2);
+        /* Bootstrap'in varsayılan long press davranışını devre dışı bırak */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .navbar-toggler {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+        /* Bootstrap'in varsayılan long press davranışını devre dışı bırak */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .dropdown-toggle {
+        /* Bootstrap'in varsayılan long press davranışını devre dışı bırak */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Mobil dropdown menü için özel stiller */
+    .dropdown-menu {
+        /* Bootstrap'in varsayılan long press davranışını devre dışı bırak */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}

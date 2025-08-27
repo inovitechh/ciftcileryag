@@ -49,29 +49,51 @@ function initMobileDropdownTouch() {
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     
     dropdownToggles.forEach(toggle => {
-        // Dokunmatik cihazlarda hover yerine click kullan
-        toggle.addEventListener('touchstart', function(e) {
+        // Bootstrap'i tamamen devre dışı bırak
+        toggle.removeAttribute('data-bs-toggle');
+        toggle.removeAttribute('data-bs-target');
+        
+        // Kendi dropdown sistemimizi oluştur
+        toggle.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            // Dokunmatik geri bildirim
+            this.style.transform = 'scale(0.98)';
+            this.style.opacity = '0.8';
+            
+            // Kısa süre sonra normal haline döndür
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, 150);
             
             // Diğer açık dropdown'ları kapat
             const otherDropdowns = document.querySelectorAll('.dropdown.show');
             otherDropdowns.forEach(dropdown => {
                 if (dropdown !== this.closest('.dropdown')) {
-                    const bsDropdown = new bootstrap.Dropdown(dropdown.querySelector('.dropdown-toggle'));
-                    bsDropdown.hide();
+                    dropdown.classList.remove('show');
+                    const otherToggle = dropdown.querySelector('.dropdown-toggle');
+                    if (otherToggle) {
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                    }
                 }
             });
             
             // Bu dropdown'ı aç/kapat
             const dropdown = this.closest('.dropdown');
-            const bsDropdown = new bootstrap.Dropdown(this);
+            const isOpen = dropdown.classList.contains('show');
             
-            if (dropdown.classList.contains('show')) {
-                bsDropdown.hide();
+            if (isOpen) {
+                // Dropdown'ı kapat
+                dropdown.classList.remove('show');
+                this.setAttribute('aria-expanded', 'false');
             } else {
-                bsDropdown.show();
+                // Dropdown'ı aç
+                dropdown.classList.add('show');
+                this.setAttribute('aria-expanded', 'true');
             }
-        }, { passive: false });
+        });
         
         // Mobil dropdown menü öğeleri için dokunmatik optimizasyon
         const dropdownMenu = toggle.nextElementSibling;
@@ -79,7 +101,10 @@ function initMobileDropdownTouch() {
             const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
             
             dropdownItems.forEach(item => {
-                item.addEventListener('touchstart', function(e) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
                     // Dokunmatik geri bildirim
                     this.style.transform = 'scale(0.98)';
                     this.style.backgroundColor = 'var(--primary-color)';
@@ -91,16 +116,46 @@ function initMobileDropdownTouch() {
                         this.style.backgroundColor = '';
                         this.style.color = '';
                     }, 150);
-                });
-                
-                item.addEventListener('touchend', function(e) {
+                    
                     // Dropdown'ı kapat
                     const dropdown = this.closest('.dropdown');
-                    const bsDropdown = new bootstrap.Dropdown(dropdown.querySelector('.dropdown-toggle'));
-                    bsDropdown.hide();
+                    dropdown.classList.remove('show');
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                    
+                    // Link'e git (eğer href varsa)
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        if (href.startsWith('#')) {
+                            // Sayfa içi link
+                            const targetElement = document.querySelector(href);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        } else {
+                            // Harici link
+                            window.location.href = href;
+                        }
+                    }
                 });
             });
         }
+    });
+    
+    // Dropdown dışına tıklandığında kapat
+    document.addEventListener('click', function(e) {
+        const dropdowns = document.querySelectorAll('.dropdown.show');
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                if (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
     });
 }
 
