@@ -1,3 +1,6 @@
 [33m1bd6a5b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m 1
 [33m4705f62[m[33m ([m[1;31morigin/master[m[33m)[m Add comprehensive README documentation
 [33ma49d10f[m Initial commit: Çiftçiler Yağ website with multi-language support (TR/EN/HE)
+[33m3b10b94[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Fix mobile dropdown issues - remove Bootstrap data-bs-toggle and implement custom dropdown system
+[33m471cc34[m Merge branch 'master' of https://github.com/inovitechh/ciftcileryag
+[33mbd1baeb[m yeni
