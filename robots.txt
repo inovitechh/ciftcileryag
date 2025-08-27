@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.ciftcileryag.com.tr/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all important directories
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /sertifikalar/
+
+# Disallow temporary or private files
+Disallow: /temp/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /backup/
+Disallow: /*.log$
+Disallow: /*.tmp$
+
+# Allow all language versions
+Allow: /en/
+Allow: /he/

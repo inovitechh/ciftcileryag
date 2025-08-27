@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Turkish Pages -->
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ciftcileryag.com.tr/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/basinda-biz/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/in-the-press/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/basinda-biz/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/fabrika-uretim/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/factory-production/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/fabrika-uretim/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/sertifikalar/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/certificates/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/sertifikalar/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/politikalar/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/policies/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/politikalar/"/>
+    </url>
+    
+    <!-- English Pages -->
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/en/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ciftcileryag.com.tr/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/en/in-the-press/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/basinda-biz/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/basinda-biz/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/en/factory-production/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/fabrika-uretim/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/fabrika-uretim/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/en/certificates/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/sertifikalar/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/sertifikalar/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/en/policies/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/politikalar/"/>
+        <xhtml:link rel="alternate" hreflang="he" href="https://www.ciftcileryag.com.tr/he/politikalar/"/>
+    </url>
+    
+    <!-- Hebrew Pages -->
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/he/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ciftcileryag.com.tr/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/he/basinda-biz/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/basinda-biz/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/in-the-press/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/he/fabrika-uretim/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/fabrika-uretim/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/factory-production/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/he/sertifikalar/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/sertifikalar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/certificates/"/>
+    </url>
+    
+    <url>
+        <loc>https://www.ciftcileryag.com.tr/he/politikalar/</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://www.ciftcileryag.com.tr/politikalar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.ciftcileryag.com.tr/en/policies/"/>
+    </url>
+    
+</urlset>
