@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
     initLoadingAnimations();
     initHoverDropdowns(); // Desktop hover functionality
+    initMobileTouchOptimizations(); // Mobil dokunmatik optimizasyonları
 });
 
 // Navbar functionality
@@ -23,6 +24,144 @@ function initNavbar() {
             navbar.style.background = 'linear-gradient(135deg, var(--bg-dark) 0%, #2c3e50 100%)';
             navbar.style.backdropFilter = 'blur(10px)';
         }
+    });
+}
+
+// Mobil dokunmatik optimizasyonları
+function initMobileTouchOptimizations() {
+    // Dokunmatik cihaz kontrolü
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouchDevice) {
+        // Mobil dropdown menü için dokunmatik optimizasyonları
+        initMobileDropdownTouch();
+        
+        // Mobil navbar toggle için dokunmatik optimizasyonları
+        initMobileNavbarTouch();
+        
+        // Mobil link tıklamaları için optimizasyonlar
+        initMobileLinkTouch();
+    }
+}
+
+// Mobil dropdown dokunmatik optimizasyonları
+function initMobileDropdownTouch() {
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        // Dokunmatik cihazlarda hover yerine click kullan
+        toggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            
+            // Diğer açık dropdown'ları kapat
+            const otherDropdowns = document.querySelectorAll('.dropdown.show');
+            otherDropdowns.forEach(dropdown => {
+                if (dropdown !== this.closest('.dropdown')) {
+                    const bsDropdown = new bootstrap.Dropdown(dropdown.querySelector('.dropdown-toggle'));
+                    bsDropdown.hide();
+                }
+            });
+            
+            // Bu dropdown'ı aç/kapat
+            const dropdown = this.closest('.dropdown');
+            const bsDropdown = new bootstrap.Dropdown(this);
+            
+            if (dropdown.classList.contains('show')) {
+                bsDropdown.hide();
+            } else {
+                bsDropdown.show();
+            }
+        }, { passive: false });
+        
+        // Mobil dropdown menü öğeleri için dokunmatik optimizasyon
+        const dropdownMenu = toggle.nextElementSibling;
+        if (dropdownMenu) {
+            const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+            
+            dropdownItems.forEach(item => {
+                item.addEventListener('touchstart', function(e) {
+                    // Dokunmatik geri bildirim
+                    this.style.transform = 'scale(0.98)';
+                    this.style.backgroundColor = 'var(--primary-color)';
+                    this.style.color = 'white';
+                    
+                    // Kısa süre sonra normal haline döndür
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                    }, 150);
+                });
+                
+                item.addEventListener('touchend', function(e) {
+                    // Dropdown'ı kapat
+                    const dropdown = this.closest('.dropdown');
+                    const bsDropdown = new bootstrap.Dropdown(dropdown.querySelector('.dropdown-toggle'));
+                    bsDropdown.hide();
+                });
+            });
+        }
+    });
+}
+
+// Mobil navbar toggle dokunmatik optimizasyonları
+function initMobileNavbarTouch() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            
+            // Dokunmatik geri bildirim
+            this.style.transform = 'scale(0.95)';
+            
+            // Navbar'ı aç/kapat
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: true
+            });
+            
+            // Kısa süre sonra normal haline döndür
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        }, { passive: false });
+        
+        // Navbar dışına tıklandığında kapat
+        document.addEventListener('touchstart', function(e) {
+            if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+                if (navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                    bsCollapse.hide();
+                }
+            }
+        });
+    }
+}
+
+// Mobil link dokunmatik optimizasyonları
+function initMobileLinkTouch() {
+    const mobileLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('touchstart', function(e) {
+            // Dokunmatik geri bildirim
+            this.style.transform = 'scale(0.98)';
+            this.style.opacity = '0.8';
+            
+            // Kısa süre sonra normal haline döndür
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, 150);
+            
+            // Mobil menüyü kapat
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                bsCollapse.hide();
+            }
+        });
     });
 }
 
@@ -315,50 +454,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Desktop hover dropdown functionality
 function initHoverDropdowns() {
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
-    dropdowns.forEach(dropdown => {
-        let hoverTimeout;
+    // Sadece hover destekleyen cihazlarda çalıştır
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const dropdowns = document.querySelectorAll('.dropdown');
         
-        dropdown.addEventListener('mouseenter', function() {
-            // Close all other dropdowns immediately
-            dropdowns.forEach(otherDropdown => {
-                if (otherDropdown !== this) {
-                    const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                    if (otherMenu) {
-                        otherMenu.style.opacity = '0';
-                        otherMenu.style.transform = 'translateY(-10px)';
-                        setTimeout(() => {
-                            otherMenu.style.display = 'none';
-                        }, 50);
+        dropdowns.forEach(dropdown => {
+            let hoverTimeout;
+            
+            dropdown.addEventListener('mouseenter', function() {
+                // Close all other dropdowns immediately
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== this) {
+                        const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                        if (otherMenu) {
+                            otherMenu.style.opacity = '0';
+                            otherMenu.style.transform = 'translateY(-10px)';
+                            setTimeout(() => {
+                                otherMenu.style.display = 'none';
+                            }, 50);
+                        }
                     }
-                }
+                });
+                
+                clearTimeout(hoverTimeout);
+                requestAnimationFrame(() => {
+                    const dropdownMenu = this.querySelector('.dropdown-menu');
+                    if (dropdownMenu) {
+                        dropdownMenu.style.display = 'block';
+                        dropdownMenu.style.opacity = '1';
+                        dropdownMenu.style.transform = 'translateY(0)';
+                    }
+                });
             });
             
-            clearTimeout(hoverTimeout);
-            requestAnimationFrame(() => {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                if (dropdownMenu) {
-                    dropdownMenu.style.display = 'block';
-                    dropdownMenu.style.opacity = '1';
-                    dropdownMenu.style.transform = 'translateY(0)';
-                }
+            dropdown.addEventListener('mouseleave', function() {
+                hoverTimeout = setTimeout(() => {
+                    const dropdownMenu = this.querySelector('.dropdown-menu');
+                    if (dropdownMenu) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.transform = 'translateY(-10px)';
+                        setTimeout(() => {
+                            dropdownMenu.style.display = 'none';
+                        }, 50);
+                    }
+                }, 50); // Reduced from 150ms to 50ms for faster response
             });
         });
-        
-        dropdown.addEventListener('mouseleave', function() {
-            hoverTimeout = setTimeout(() => {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                if (dropdownMenu) {
-                    dropdownMenu.style.opacity = '0';
-                    dropdownMenu.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        dropdownMenu.style.display = 'none';
-                    }, 50);
-                }
-            }, 50); // Reduced from 150ms to 50ms for faster response
-        });
-    });
+    }
 }
 
 // Add CSS for notifications
@@ -393,6 +535,21 @@ notificationStyles.textContent = `
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+    }
+    
+    /* Mobil dokunmatik optimizasyonları için ek stiller */
+    @media (hover: none) and (pointer: coarse) {
+        .dropdown-item {
+            -webkit-tap-highlight-color: rgba(255, 107, 53, 0.2);
+        }
+        
+        .nav-link {
+            -webkit-tap-highlight-color: rgba(255, 107, 53, 0.2);
+        }
+        
+        .navbar-toggler {
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+        }
     }
 `;
 document.head.appendChild(notificationStyles);

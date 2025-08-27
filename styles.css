@@ -9,6 +9,7 @@
     --bg-light: #f8f9fa;
     --shadow: 0 10px 30px rgba(0,0,0,0.1);
     --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+    --touch-target-size: 44px; /* Minimum dokunmatik hedef boyutu */
 }
 
 * {
@@ -22,6 +23,13 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    /* Dokunmatik optimizasyonu */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* Navigation */
@@ -38,6 +46,10 @@ body {
     font-weight: bold;
     color: var(--text-light) !important;
     text-decoration: none;
+    /* Dokunmatik hedef boyutu */
+    min-height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
 }
 
 .navbar-brand i {
@@ -50,11 +62,19 @@ body {
     margin: 0 0.5rem;
     transition: all 0.3s ease;
     position: relative;
+    /* Dokunmatik hedef boyutu */
+    min-height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem !important;
 }
 
-.nav-link:hover {
-    color: var(--primary-color) !important;
-    transform: translateY(-2px);
+/* Desktop hover efektleri - sadece hover destekleyen cihazlarda */
+@media (hover: hover) and (pointer: fine) {
+    .nav-link:hover {
+        color: var(--primary-color) !important;
+        transform: translateY(-2px);
+    }
 }
 
 /* Aktif sayfa vurgulaması tamamen kaldırıldı */
@@ -68,9 +88,12 @@ body {
     background: transparent !important;
 }
 
-.dropdown-item.active:hover {
-    background: var(--primary-color) !important;
-    color: white !important;
+/* Desktop hover efektleri - sadece hover destekleyen cihazlarda */
+@media (hover: hover) and (pointer: fine) {
+    .dropdown-item.active:hover {
+        background: var(--primary-color) !important;
+        color: white !important;
+    }
 }
 
 .dropdown-menu {
@@ -103,6 +126,14 @@ body {
     .dropdown-menu {
         opacity: 1 !important;
         transform: none !important;
+        margin-top: 0.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Mobil dropdown menü için özel stiller */
+    .dropdown-menu.show {
+        display: block !important;
     }
 }
 
@@ -111,6 +142,10 @@ body {
     pointer-events: auto;
     position: relative;
     z-index: 5;
+    /* Dokunmatik hedef boyutu */
+    min-height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
 }
 
 .dropdown-toggle:focus {
@@ -131,22 +166,93 @@ body {
     position: relative;
     z-index: 10;
     background: transparent;
+    /* Dokunmatik hedef boyutu */
+    min-height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
 }
 
-.dropdown-item:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateX(5px);
-    border-radius: 25px;
-    margin: 0 10px;
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-    text-decoration: none;
-    overflow: hidden;
+/* Desktop hover efektleri - sadece hover destekleyen cihazlarda */
+@media (hover: hover) and (pointer: fine) {
+    .dropdown-item:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(5px);
+        border-radius: 25px;
+        margin: 0 10px;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+        text-decoration: none;
+        overflow: hidden;
+    }
 }
 
-.dropdown-item:active {
-    transform: translateX(5px) scale(0.98);
+/* Mobil dokunmatik efektleri */
+@media (hover: none) and (pointer: coarse) {
+    .dropdown-item:active {
+        background: var(--primary-color);
+        color: white;
+        transform: scale(0.98);
+    }
+}
+
+/* Desktop dokunmatik efektleri */
+@media (hover: hover) and (pointer: fine) {
+    .dropdown-item:active {
+        transform: translateX(5px) scale(0.98);
+    }
+}
+
+/* Mobil navbar toggle butonu için dokunmatik optimizasyon */
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    min-height: var(--touch-target-size);
+    min-width: var(--touch-target-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler:active {
+    transform: scale(0.95);
+}
+
+.navbar-toggler-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+/* Mobil navbar collapse animasyonu */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-collapse.collapsing {
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-collapse.show {
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        margin-top: 1rem;
+        padding: 1rem;
+        box-shadow: var(--shadow);
+    }
 }
 
 /* Hero Section */
@@ -929,7 +1035,33 @@ body {
         text-align: center;
     }
     
-    /* Mobile dropdown improvements */
+    /* Mobil dokunmatik optimizasyonları */
+    .nav-link {
+        padding: 1rem 0.75rem !important;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-toggle {
+        padding: 1rem 0.75rem;
+        font-size: 1.1rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .dropdown-toggle::after {
+        margin-left: auto;
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(180deg);
+    }
+    
     .dropdown-menu {
         position: static !important;
         float: none;
@@ -937,22 +1069,54 @@ body {
         margin-top: 0.5rem;
         border-radius: 10px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
     }
     
-    /* Let Bootstrap handle mobile dropdown display completely */
     .dropdown-menu.show {
         display: block !important;
     }
     
     .dropdown-item {
         margin: 0 5px;
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        color: var(--text-light);
+        border-radius: 10px;
+        margin-bottom: 0.25rem;
     }
     
+    /* Mobil hover efektlerini devre dışı bırak */
     .dropdown-item:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: none;
         width: calc(100% - 10px);
         margin: 0 5px;
+    }
+    
+    /* Mobil dokunmatik efektleri */
+    .dropdown-item:active {
+        background: var(--primary-color);
+        color: white;
+        transform: scale(0.98);
+    }
+    
+    /* Mobil navbar toggle butonu */
+    .navbar-toggler {
+        padding: 0.75rem;
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    /* Mobil navbar collapse */
+    .navbar-collapse.show {
+        background: rgba(26, 26, 26, 0.98);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        margin-top: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 }
 
